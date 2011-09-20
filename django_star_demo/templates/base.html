@@ -1,0 +1,24 @@
+<!Doctype HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>Django-star-demo</title>
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<h1>{{ object.title }}</h1>
+			</header>
+			<nav id="admin">
+				<a href="/admin/" title="Open Django Admin site" target="_blank">Admin</a>
+			</nav>
+			<section id="content">
+				{% block content %}
+				{% endblock %}
+			</section>
+			<footer>
+				<address>Copyright &copy; 2011 giginet allright reserved.</address>
+			</footer>
+		</div>
+	</body>
+</html>

@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.generic import GenericForeignKey
+from django.utils.translation import ugettext_lazy as _
 
 class StarManager(models.Manager):
     def get_for_object(self, obj):
@@ -35,13 +36,13 @@ class Star(models.Model):
     content_object = GenericForeignKey(ct_field="content_type", fk_field="object_id")
     
     author          = models.ForeignKey(User, verbose_name=_('author'))
-    comment         = models.CharField(_('comment'))
+    comment         = models.CharField(_('comment'), max_length=512)
     
     created_at      = models.DateTimeField(_('created at'), auto_now=True)
     objects         = StarManager()
     
     class Meta:
-        ordering            = ('author.pk',)
+        ordering            = ('author__pk',)
         verbose_name        = _('star')
         verbose_name_plural = _('stars')
         

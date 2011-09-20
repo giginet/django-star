@@ -1,22 +1,23 @@
 # Django settings for django_star_demo project.
+import sys
+import os.path
+ROOT = os.path.join(os.path.dirname(__file__), '../../')
+sys.path.append(os.path.join(ROOT, '../'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
+ADMINS = []
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(ROOT, 'star.db'),  # Or path to database file if using sqlite3.
+        'USER': '',                             # Not used with sqlite3.
+        'PASSWORD': '',                         # Not used with sqlite3.
+        'HOST': '',                             # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                             # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -83,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'l(yzyc)x^qdb9*vq(1jb#af72d_tn4y&co-sq%o+b2zr71emyr'
+SECRET_KEY = "Make this unique, and don't share it with anybody."
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -103,9 +104,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'django_star_demo.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.path.dirname(__file__), '../../templates'),
 )
 
 INSTALLED_APPS = (
@@ -115,8 +114,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'star',
+    'django_star_demo.blogs',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
