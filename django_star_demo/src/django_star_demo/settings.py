@@ -28,11 +28,11 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Tokyo'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
 SITE_ID = 1
 
@@ -105,6 +105,10 @@ ROOT_URLCONF = 'django_star_demo.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), '../../templates'),
+)
+
+FIXTURE_DIRS = (
+    os.path.join(os.path.dirname(__file__), '../../fixtures'),
 )
 
 INSTALLED_APPS = (

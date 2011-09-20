@@ -15,10 +15,10 @@ class StarManager(models.Manager):
         ct = ContentType.objects.get_for_model(obj)
         return self.filter(content_type=ct, object_id=obj.pk)
         
-    def add_for_object(self, obj, author, color_slug ,comment=""):
+    def add_for_object(self, obj, author, color_slug='yellow' ,comment=""):
         u"""Add a star to 'obj' and return Star instance."""
         ct = ContentType.objects.get_for_model(obj)
-        color = Color.objects.get(slug=color_slug)
+        color = Color.objects.get_or_create(name=_('yellow'), slug=color_slug)
         star, created = self.create(author=author, comment=comment, content_type=ct, object_id=obj.pk, color=color)
         if created:
             return star
