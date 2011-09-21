@@ -1,5 +1,0 @@
-- model: star.color
-  pk: 1
-  fields:
-    name: 黄色
-    slug: yellow
