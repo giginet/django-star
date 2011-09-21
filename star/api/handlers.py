@@ -28,7 +28,7 @@ def get_or_not_found(fn):
     return wrapper
 
 class StarHandler(BaseHandler):
-    allowed_method = ('GET', 'POST', 'PUT', 'DELETE')
+    allowed_method = ('GET', 'POST', 'DELETE')
     model = Star
     fields = (
               'pk',
@@ -44,4 +44,14 @@ class StarHandler(BaseHandler):
     
     @get_or_not_found
     def create(self, request, content_type, object_id, tag=None, comment=None):
-        qs = self.model.add_for_object(request.obj, request.user, tag, comment)
+        if request.user.is_authenticated():
+            instance = self.model.add_for_object(request.obj, request.user, tag, comment)
+            return instance
+        return rc.FORBIDDEN
+    
+    def delete(self, request, star_id):
+        if request.user.is_authenticated() and request.user.pk is request.obj.author.pk:
+            star = self.model.objects.get(pk=star_id)
+            star.remove()
+            return rc.DELETED
+        return rc.FORBIDDEN
