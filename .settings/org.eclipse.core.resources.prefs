@@ -1,6 +1,7 @@
-#Tue Sep 20 11:49:05 JST 2011
+#Tue Sep 20 23:48:41 JST 2011
 eclipse.preferences.version=1
 encoding//django_star_demo/src/django_star_demo/blogs/admin.py=utf-8
 encoding//django_star_demo/src/django_star_demo/blogs/urls.py=utf-8
 encoding//star/admin.py=utf-8
 encoding//star/api/handlers.py=utf-8
+encoding//star/api/urls.py=utf-8

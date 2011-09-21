@@ -8,5 +8,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/',                       include(admin.site.urls)),
     (r'^blogs/',                       include('django_star_demo.blogs.urls')),
+    (r'^api/star/',                 include('star.api.urls')),
     url(r'^$',                         TemplateView.as_view(template_name="index.html"), name='index'),
 )

@@ -15,11 +15,10 @@ class StarManager(models.Manager):
         ct = ContentType.objects.get_for_model(obj)
         return self.filter(content_type=ct, object_id=obj.pk)
         
-    def add_for_object(self, obj, author, color_slug='yellow' ,comment=""):
+    def add_for_object(self, obj, author, tag=None ,comment=None):
         u"""Add a star to 'obj' and return Star instance."""
         ct = ContentType.objects.get_for_model(obj)
-        color = Color.objects.get_or_create(name=_('yellow'), slug=color_slug)
-        star, created = self.create(author=author, comment=comment, content_type=ct, object_id=obj.pk, color=color)
+        star, created = self.create(author=author, comment=comment, content_type=ct, object_id=obj.pk, tag=tag)
         if created:
             return star
      
@@ -29,14 +28,6 @@ class StarManager(models.Manager):
         for star in stars:
             star.remove()
 
-class Color(models.Model):
-    u"""model for color of star."""
-    name           = models.CharField(_('color name'), max_length=32)
-    slug           = models.SlugField(_('color slug'))
-
-    def __unicode__(self):
-        return self.name
-
 class Star(models.Model):
     u"""model for star"""
     content_type    = models.ForeignKey(ContentType, verbose_name=_('content type'), related_name="content_type_set_for_%(class)s")
@@ -45,7 +36,7 @@ class Star(models.Model):
     
     author          = models.ForeignKey(User, verbose_name=_('author'))
     comment         = models.CharField(_('comment'), max_length=512, null=True, blank=True)
-    color           = models.ForeignKey(Color, verbose_name=_('color'))
+    tag             = models.CharField(_('star tag'), max_length=32, null=True, blank=True)
     
     created_at      = models.DateTimeField(_('created at'), auto_now=True)
     objects         = StarManager()

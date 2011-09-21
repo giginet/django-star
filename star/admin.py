@@ -5,15 +5,10 @@
 #
 from django.contrib import admin
 
-from models import Star, Color
+from models import Star
 
 class StarAdmin(admin.ModelAdmin):
     list_display = ('content_object', 'author', 'comment')
     search_fields = ('content_object',)
     filter_fields = ('author',)
 admin.site.register(Star, StarAdmin)
-
-class ColorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug',)
-    search_fields = ('name', 'slug',)
-admin.site.register(Color, ColorAdmin)
