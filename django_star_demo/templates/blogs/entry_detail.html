@@ -1,8 +1,25 @@
 {% extends "base.html" %}
+
+{% block head %}
+	<script type="text/javascript" src="/js/django.star.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('div.container').djangoStar({
+				'url' : {
+					'get' : '/api/star/9/1/',
+					'create' : '/api/star/9/1/',
+				}
+			});
+		});
+	</script>
+{% endblock %}
+	
+
 {% block content %}
 <article>
 	<header>
 		<h2>{{ object.title }}</h2>
+		<div class="container"></div>
 	</header>
 	<section>
 		{{ object.body }}

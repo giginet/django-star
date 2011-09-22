@@ -11,11 +11,11 @@ from piston.handler import BaseHandler
 from piston.utils import rc, validate, throttle
 from ..models import Star
 
-
 def get_or_not_found(fn):
     """Get and set object or return rc.NOT_FOUND decorator
        Get object instance from content_type and object_id and set it to request.obj
        and call decorated function, or return rc.NOT_FOUND when object could not be found
+       this snippet is quoted from 'https://github.com/lambdalisue/django-universaltag/blob/master/universaltag/api/handlers.py#L45'.
     """
     def wrapper(self, request, content_type, object_id, *args, **kwargs):
         try:
@@ -28,7 +28,7 @@ def get_or_not_found(fn):
     return wrapper
 
 class StarHandler(BaseHandler):
-    allowed_method = ('GET', 'POST', 'DELETE')
+    allowed_method = ('GET', 'POST', 'DELETE',)
     model = Star
     fields = (
               'pk',
@@ -43,9 +43,10 @@ class StarHandler(BaseHandler):
         return qs
     
     @get_or_not_found
-    def create(self, request, content_type, object_id, tag=None, comment=None):
+    def create(self, request, content_type, object_id, comment=None, tag=None):
+        print request.user.is_authenticated()
         if request.user.is_authenticated():
-            instance = self.model.add_for_object(request.obj, request.user, tag, comment)
+            instance = self.model.add_for_object(request.obj, request.user, comment, tag)
             return instance
         return rc.FORBIDDEN
     

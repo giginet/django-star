@@ -15,7 +15,7 @@ class StarManager(models.Manager):
         ct = ContentType.objects.get_for_model(obj)
         return self.filter(content_type=ct, object_id=obj.pk)
         
-    def add_for_object(self, obj, author, tag=None ,comment=None):
+    def add_for_object(self, obj, author, comment=None, tag=None):
         u"""Add a star to 'obj' and return Star instance."""
         ct = ContentType.objects.get_for_model(obj)
         star, created = self.create(author=author, comment=comment, content_type=ct, object_id=obj.pk, tag=tag)
