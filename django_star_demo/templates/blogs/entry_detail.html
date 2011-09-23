@@ -1,23 +1,8 @@
 {% extends "base.html" %}
+{% load djangostar %}
 
 {% block head %}
-	<script type="text/javascript" src="/js/django.star.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('div.container').djangoStar({
-				'url' : '/api/star/9/1/',
-				'popup' : {
-					'quote' : {
-						'begin' : '「',
-						'end' : '」'
-					}
-				},
-				'del' : {
-					'message' : '削除します。よろしいですか？'
-				}
-			});
-		});
-	</script>
+	{% render_djangostar_head %}
 {% endblock %}
 	
 
@@ -25,10 +10,10 @@
 <article>
 	<header>
 		<h2>{{ object.title }}</h2>
-		<div class="container"></div>
 	</header>
 	<section>
 		{{ object.body }}
+		{% render_djangostar_list of object %}
 	</section>
 </article>
 {% endblock %}
