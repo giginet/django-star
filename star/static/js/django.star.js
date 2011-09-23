@@ -1,7 +1,5 @@
 (function() {
     jQuery.fn.djangoStar = function(config) {
-        console.log("hgoehgpa")
-            
         $(this).each( function(){
             $this = $(this);
             config = $.extend(true, {
@@ -36,7 +34,6 @@
                     }, 'json');
                     return 0;
                 }).attr('title', config.add.caption));
-                console.log($addButton);
                 $container.append($addButton);
             }
 
@@ -64,14 +61,14 @@
                         'left' : event.pageX + 20
                     })
                     if(logged_in && parseInt(config.user_id) === user_id) {
-                        $(this).delay(config.del.delay).queue( function() {
+                        $(this).animate({'opacity' : 1}, config.del.delay, function() {
+                            $popup.remove();
                             if(confirm(config.del.message)) {
-                                var id = $(this).attr('star-id');
+                                var id = $star.attr('star-id');
                                 $.ajax({
                                     'url' : url + id + '/',
                                     'type' : 'DELETE',
                                     'success' : function(data) {
-                                        $star.clearQueue();
                                         $star.toggle('slow', function() {
                                             $(this).remove();
                                         });
@@ -81,7 +78,7 @@
                         });
                     }
                 }).bind('mouseout', function(event) {
-                    $(this).clearQueue();
+                    $(this).stop();
                     $popup.fadeOut('fast', function() {
                         $(this).remove();
                     });
