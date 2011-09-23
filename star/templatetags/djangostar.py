@@ -8,8 +8,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.template import TemplateSyntaxError
-from django.utils.translation import ugettext_lazy as _
-import json
 
 from ..models import Star
 
@@ -29,7 +27,6 @@ class RenderDjangoStarListNode(template.Node):
         
     def render(self, context):
         object = self.object.resolve(context)
-        print object
         content_type = ContentType.objects.get_for_model(object)
         context.push()
         html = render_to_string('star/list.html', {

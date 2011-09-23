@@ -29,13 +29,13 @@ class StarManager(models.Manager):
 
 class Star(models.Model):
     u"""model for star"""
-    content_type    = models.ForeignKey(ContentType, verbose_name=_('content type'), related_name="content_type_set_for_%(class)s")
-    object_id       = models.PositiveIntegerField(_('object ID'))
+    content_type    = models.ForeignKey(ContentType, verbose_name='Content Type', related_name="content_type_set_for_%(class)s")
+    object_id       = models.PositiveIntegerField('Object ID')
     content_object  = GenericForeignKey(ct_field="content_type", fk_field="object_id")
     
     author          = models.ForeignKey(User, verbose_name=_('author'))
     comment         = models.CharField(_('comment'), max_length=512, null=True, blank=True)
-    tag             = models.CharField(_('star tag'), max_length=32, null=True, blank=True)
+    tag             = models.CharField(_('tag'), max_length=32, null=True, blank=True)
     
     created_at      = models.DateTimeField(_('created at'), auto_now=True)
     objects         = StarManager()
