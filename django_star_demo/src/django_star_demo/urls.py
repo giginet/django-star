@@ -16,6 +16,6 @@ urlpatterns = patterns('',
 document_root = lambda x: os.path.join(os.path.dirname(__file__), x)
 urlpatterns += patterns('django.views.static',
     (r'^css/(?P<path>.*)$', 'serve', {'document_root': document_root('../../static/css')}),
-    (r'^js/(?P<path>.*)$', 'serve', {'document_root': document_root('../../static/js')}),
+    (r'^js/(?P<path>.*)$',  'serve', {'document_root': document_root('../../static/js')}),
     (r'^img/(?P<path>.*)$', 'serve', {'document_root': document_root('../../static/img')}),
 )

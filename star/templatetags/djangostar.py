@@ -53,11 +53,11 @@ def render_djangostar_head(parser, token):
 def render_djangostar_list(parser, token):
     """Render universaltag list as ul list
     Usage:
-        {% render_djangostar_list of <object> %}
+        {% render_djangostar_list for <object> %}
     """
     bits = token.split_contents()
-    if bits[1] != "of":
-        raise TemplateSyntaxError("Second argument must be 'of'.")
+    if bits[1] != "for":
+        raise TemplateSyntaxError("Second argument must be 'for'.")
     if len(bits) == 3:
         return RenderDjangoStarListNode(bits[2])
     raise TemplateSyntaxError("%s tag takes exactly 3 arguments." % bits[0])

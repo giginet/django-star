@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/django.star.css" type="text/css" media="screen, projection"/>
 <script type="text/javascript" src="{{ STATIC_URL }}js/django.star.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$('div.django-star-container').djangoStar({
+	$(document).ready(function() {
+		$('div.django-star').djangoStar({
 			'add' : {
 				'caption' : "{% trans "Add Star" %}"
 			},
