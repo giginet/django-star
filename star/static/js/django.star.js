@@ -15,22 +15,26 @@
 				'delay' : 2000
 			}
 		}, config);
-		var addButton = $('<div>').addClass('django-star-add-button').append($('<a>')
-		.attr('href', 'javascript:void(0)').bind('click', function(){
-			// this code may not work well on IE.
-			var comment = document.getSelection();
-			$.post(url, {comment : comment}, function(data){
-				$container.append(createStar(data).fadeIn('slow'))
-			}, 'json');
-		}).attr('title', config.add.caption));
-		$(this).append(addButton);
 		var $container = $('<ul>').addClass('django-star-container');
 		var object_id = $(this).attr('object-id');
 		var content_type = $(this).attr('content-type');
 		var url = $(this).attr('api-url');
-		console.log(url);
+		var logged_in = config.logged_in === 'True';
+		if(logged_in){
+			var addButton = $('<div>').addClass('django-star-add-button').append($('<a>')
+			.attr('href', 'javascript:void(0)').bind('click', function(){
+				// this code may not work well on IE.
+				var comment = document.getSelection();
+				$.post(url, {comment : comment}, function(data){
+					$container.append(createStar(data).fadeIn('slow'))
+				}, 'json');
+			}).attr('title', config.add.caption));
+		}
+		$(this).append(addButton);
+		
 		var createStar = function(data){
 			var username = data.author.username;
+			var user_id = parseInt(data.author.pk);
 			var comment = data.comment;
 			var $star = $('<li>');
 			var $popup = $('<div>').addClass('django-star-popup');
@@ -51,21 +55,23 @@
 					'top' : event.pageY + 20,
 					'left' : event.pageX + 20
 				})
-				$(this).delay(config.del.delay).queue(function(){
-					if(confirm(config.del.message)){
-						var id = $(this).attr('star-id');
-						$.ajax({
-							'url' : url + id + '/', 
-							'type' : 'DELETE',
-							'success' : function(data){
-								$star.clearQueue();
-								$star.toggle('slow', function(){
-									$(this).remove();
-								});
-							}
-						})
-					}
-				});
+				if(logged_in && parseInt(config.user_id) === user_id){
+					$(this).delay(config.del.delay).queue(function(){
+						if(confirm(config.del.message)){
+							var id = $(this).attr('star-id');
+							$.ajax({
+								'url' : url + id + '/', 
+								'type' : 'DELETE',
+								'success' : function(data){
+									$star.clearQueue();
+									$star.toggle('slow', function(){
+										$(this).remove();
+									});
+								}
+							})
+						}
+					});
+				}
 			}).bind('mouseout', function(event){
 				$(this).clearQueue();
 				$popup.fadeOut('fast', function(){

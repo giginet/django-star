@@ -33,7 +33,7 @@ class StarHandler(BaseHandler):
     fields = (
               'pk',
               'type',
-              ('author', ('username', ), ),
+              ('author', ('username', 'pk', ), ),
               'comment'
     )
     
