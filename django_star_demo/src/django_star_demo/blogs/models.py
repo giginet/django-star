@@ -4,6 +4,10 @@ class Entry(models.Model):
     title = models.CharField(u'title', max_length=256)
     body  = models.TextField(u'body')
     
+    class Meta:
+        verbose_name = 'entry'
+        verbose_name_plural = 'entries'
+    
     def __unicode__(self):
         return self.title
     

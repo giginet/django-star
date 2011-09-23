@@ -18,9 +18,8 @@ class StarManager(models.Manager):
     def add_for_object(self, obj, author, comment=None, tag=None):
         u"""Add a star to 'obj' and return Star instance."""
         ct = ContentType.objects.get_for_model(obj)
-        star, created = self.create(author=author, comment=comment, content_type=ct, object_id=obj.pk, tag=tag)
-        if created:
-            return star
+        star = self.create(author=author, comment=comment, content_type=ct, object_id=obj.pk, tag=tag)
+        return star
      
     def cleanup_object(self, obj):
         u"""remove all related stars from 'obj'."""

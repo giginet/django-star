@@ -5,9 +5,15 @@
 	<script type="text/javascript">
 		$(function(){
 			$('div.container').djangoStar({
-				'url' : {
-					'get' : '/api/star/9/1/',
-					'create' : '/api/star/9/1/',
+				'url' : '/api/star/9/1/',
+				'popup' : {
+					'quote' : {
+						'begin' : '「',
+						'end' : '」'
+					}
+				},
+				'del' : {
+					'message' : '削除します。よろしいですか？'
 				}
 			});
 		});

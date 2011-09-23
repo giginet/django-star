@@ -43,16 +43,18 @@ class StarHandler(BaseHandler):
         return qs
     
     @get_or_not_found
-    def create(self, request, content_type, object_id, comment=None, tag=None):
-        print request.user.is_authenticated()
+    def create(self, request, content_type, object_id):
+        comment = request.POST.get('comment', '');
+        tag = request.POST.get('tag', '');
         if request.user.is_authenticated():
-            instance = self.model.add_for_object(request.obj, request.user, comment, tag)
+            instance = self.model.objects.add_for_object(request.obj, request.user, comment, tag)
             return instance
         return rc.FORBIDDEN
     
     def delete(self, request, star_id):
-        if request.user.is_authenticated() and request.user.pk is request.obj.author.pk:
-            star = self.model.objects.get(pk=star_id)
-            star.remove()
+        if not star_id: rc.BAD_REQUEST
+        star = self.model.objects.get(pk=star_id)
+        if request.user.is_authenticated() and request.user.pk is star.author.pk:
+            star.delete()
             return rc.DELETED
         return rc.FORBIDDEN
