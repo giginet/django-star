@@ -38,6 +38,9 @@
 			if(comment){
 				$popup.append($('<blockquote>').append(config.popup.quote.begin + comment + config.popup.quote.end));	
 			}
+			if(data.tag){
+				$star.addClass('django-star-tag-' + data.tag);
+			}
 			$star.attr({
 				'comment' : comment,
 				'username' : username,
