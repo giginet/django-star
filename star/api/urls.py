@@ -12,8 +12,7 @@ from handlers import StarHandler
 star_handler = Resource(StarHandler)
 
 urlpatterns = patterns('',
-    url(r'^get/(?P<content_type>\d+)/(?P<object_id>\d+)/$', star_handler, name='star-api-get'),
-    url(r'^add/(?P<content_type>\d+)/(?P<object_id>\d+)/$', star_handler, name='star-api-add'),
-    url(r'^delete/(?P<star_id>\d+)/$',                      star_handler, name='star-api-delete'),
+    url(r'^(?P<content_type>\d+)/(?P<object_id>\d+)/$',                  star_handler, name='star-api'),
+    url(r'^(?P<content_type>\d+)/(?P<object_id>\d+)/(?P<star_id>\d+)/$', star_handler, name='star-api'),
     url(r'^doc/$', documentation_view),
 )

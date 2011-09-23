@@ -16,22 +16,9 @@ from ..models import Star
 register = template.Library()
 
 class RenderDjangoStarHeadNode(template.Node):
-    def __init__(self, settings='{}'):
-        self.settings = settings
-        
     def render(self, context):
-        settings_dict = json.loads(self.settings)
-        settings_dict.update({'url' : {
-                                       'add' : '/api/star/add/',
-                                       'del' : '/api/star/del/',
-                                       'get' : '/api/star/get/',
-                                       }
-                              }
-        );
-        settings = json.dumps(settings_dict)
-        #settings = settings[1:len(settings)-1];
         context.push()
-        html = render_to_string('star/head.html', {'settings' : settings}, context)
+        html = render_to_string('star/head.html', {}, context)
         context.pop()
         return html
 
@@ -45,7 +32,11 @@ class RenderDjangoStarListNode(template.Node):
         print object
         content_type = ContentType.objects.get_for_model(object)
         context.push()
-        html = render_to_string('star/list.html', {'content_type' : content_type.pk, 'object_id' : object.pk }, context)
+        html = render_to_string('star/list.html', {
+                                                   'content_type' : content_type.pk, 
+                                                   'object_id' : object.pk,
+                                                   'api_url' : reverse('star-api', args=[content_type.pk, object.pk])
+        }, context)
         context.pop()
         return html
 
@@ -59,9 +50,7 @@ def render_djangostar_head(parser, token):
     bits = token.split_contents()
     if len(bits) == 1:
         return RenderDjangoStarHeadNode()
-    elif len(bits) == 2:
-        return RenderDjangoStarHeadNode(bits[1])
-    raise TemplateSyntaxError("%s tag takes 'setting' or no argument. " % bits[0])
+    raise TemplateSyntaxError("%s tag don't takes any arguments. " % bits[0])
 
 @register.tag
 def render_djangostar_list(parser, token):

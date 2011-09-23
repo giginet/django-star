@@ -4,16 +4,15 @@
 {% block head %}
 	{% render_djangostar_head %}
 {% endblock %}
-	
 
 {% block content %}
 <article>
 	<header>
 		<h2>{{ object.title }}</h2>
+		{% render_djangostar_list of object %}
 	</header>
 	<section>
 		{{ object.body }}
-		{% render_djangostar_list of object %}
 	</section>
 </article>
 {% endblock %}
