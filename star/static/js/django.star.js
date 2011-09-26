@@ -61,7 +61,7 @@
                         'left' : event.pageX + 20
                     });
                     if(logged_in && parseInt(config.user_id) === user_id) {
-                        var id = setTimeout(function() {
+                        $(this).animate({ opacity : 1 }, config.del.delay, function() {
                             $popup.remove();
                             if(confirm(config.del.message)) {
                                 var id = $star.attr('star-id');
@@ -75,9 +75,8 @@
                                     }
                                 });
                             }
-                        }, config.del.delay);
-                        $(this).bind('mouseout', function(event) {
-                            clearTimeout(id);
+                        }).bind('mouseout', function(event) {
+                            $(this).stop();
                             $popup.fadeOut('fast', function() {
                                 $(this).remove();
                             });
