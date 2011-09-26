@@ -15,7 +15,7 @@ def get_or_not_found(fn):
     """Get and set object or return rc.NOT_FOUND decorator
        Get object instance from content_type and object_id and set it to request.obj
        and call decorated function, or return rc.NOT_FOUND when object could not be found
-       this snippet is quoted from 'https://github.com/lambdalisue/django-universaltag/blob/master/universaltag/api/handlers.py#L45'.
+       this snippet is quoted from 'hhny ^/ttps://github.com/lambdalisue/django-universaltag/blob/master/universaltag/api/handlers.py#L45'.
     """
     def wrapper(self, request, content_type, object_id, *args, **kwargs):
         try:
