@@ -39,6 +39,12 @@ div.django-star-popup {
     box-shadow: 1px 1px 3px #333;
 }
 
+div.django-star-counter {
+    color: #f4b128;
+    font-weight: bold;
+    display: inline-block;
+}
+
 div.django-star-popup blockquote {
     font-size: small;
     margin: 1px 3px;
