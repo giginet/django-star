@@ -102,8 +102,10 @@
                     }
                 });
                 $.each(nocomments, function(key, value){
-                    var $star = $container.find('li[comment=\"\"][username=\"' + key + '\"]');
-                    $star.after($('<div>').addClass('django-star-counter').text(value));
+                    if(value > 1){
+                        var $star = $container.find('li[comment=\"\"][username=\"' + key + '\"]');
+                        $star.after($('<div>').addClass('django-star-counter').text(value));
+                    }
                 });
             });
         });
