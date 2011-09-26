@@ -1,6 +1,6 @@
 (function() {
     jQuery.fn.djangoStar = function(config) {
-        $(this).each( function(){
+        $(this).each( function() {
             $this = $(this);
             config = $.extend(true, {
                 'add' : {
@@ -29,7 +29,7 @@
                     var comment = window.getSelection().toString();
                     $.post(url, {
                         comment : comment
-                     }, function(data) {
+                    }, function(data) {
                         $container.append(createStar(data).fadeIn('slow'))
                     }, 'json');
                     return 0;
@@ -54,54 +54,56 @@
                     'comment' : comment,
                     'username' : username,
                     'star-id' : data.pk
-                 }).bind('mouseover', function(event) {
+                }).bind('mouseover', function(event) {
                     $star.append($popup.fadeIn('fast'));
                     $popup.css({
                         'top' : event.pageY + 20,
                         'left' : event.pageX + 20
-                    });
+                    })
                     if(logged_in && parseInt(config.user_id) === user_id) {
-                        $(this).animate({ opacity : 1 }, config.del.delay, function() {
+                        $(this).animate({
+                            'opacity' : 1
+                        }, config.del.delay, function() {
                             $popup.remove();
                             if(confirm(config.del.message)) {
                                 var id = $star.attr('star-id');
                                 $.ajax({
                                     'url' : url + id + '/',
                                     'type' : 'DELETE',
-                                     'success' : function(data) {
+                                    'success' : function(data) {
                                         $star.toggle('slow', function() {
                                             $(this).remove();
-                                         });
+                                        });
                                     }
-                                });
+                                })
                             }
-                        }).bind('mouseout', function(event) {
-                            $(this).stop();
-                            $popup.fadeOut('fast', function() {
-                                $(this).remove();
-                            });
                         });
                     }
+                }).bind('mouseout', function(event) {
+                    $(this).stop();
+                    $popup.fadeOut('fast', function() {
+                        $(this).remove();
+                    });
                 });
                 return $star;
             }
             $this.append($container);
             $.getJSON(url, function(data) {
                 var nocomments = {};
-                 $(data).each(function() {
-                    if(this.comment == ''){
-                        if(!nocomments[this.author.username]){
+                $(data).each( function() {
+                    if(this.comment == '') {
+                        if(!nocomments[this.author.username]) {
                             nocomments[this.author.username] = 1;
                             $container.append(createStar(this));
-                        }else{
+                        } else {
                             nocomments[this.author.username] += 1;
                         }
-                    }else{
+                    } else {
                         $container.append(createStar(this));
                     }
                 });
-                $.each(nocomments, function(key, value){
-                    if(value > 1){
+                $.each(nocomments, function(key, value) {
+                    if(value > 1) {
                         var $star = $container.find('li[comment=\"\"][username=\"' + key + '\"]');
                         $star.after($('<div>').addClass('django-star-counter').text(value));
                     }
