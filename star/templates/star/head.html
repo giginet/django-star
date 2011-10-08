@@ -2,16 +2,17 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/django.star.css" type="text/css" media="screen, projection"/>
 <script type="text/javascript" src="{{ STATIC_URL }}js/django.star.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('div.django-star').djangoStar({
-			'add' : {
-				'caption' : "{% trans "Add Star" %}"
-			},
-			'del' : {
-				'message' : "{% trans "Are you sure you want to delete this star?" %}"
-			},
-			'logged_in' : "{{ user.is_authenticated }}",
-			'user_id' : "{{ user.pk }}"
-		});
-	});
+  $(document).ready(function() {
+    $('div.django-star').djangoStar({
+      'add' : {
+        'caption' : "{% trans "Add Star" %}"
+      },
+      'del' : {
+        'message' : "{% trans "Are you sure you want to delete this star?" %}"
+      },
+      'logged_in' : "{{ user.is_authenticated }}",
+      'user_id' : "{{ user.pk }}"
+    });
+    A
+  });
 </script>
