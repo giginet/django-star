@@ -1,4 +1,18 @@
 {% extends "base.html" %}
+{% load djangostar %}
+
+{% block head %}
+  {% render_djangostar_head %}
+{% endblock %}
+
 {% block content %}
-トップページ
+<article>
+  <header>
+    <h2>{{ object.title }}</h2>
+    {% render_djangostar_list for object %}
+  </header>
+  <section>
+    {{ object.body }}
+  </section>
+</article>
 {% endblock %}

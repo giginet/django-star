@@ -2,17 +2,17 @@
 {% load djangostar %}
 
 {% block head %}
-	{% render_djangostar_head %}
+  {% render_djangostar_head %}
 {% endblock %}
 
 {% block content %}
 <article>
-	<header>
-		<h2>{{ object.title }}</h2>
-		{% render_djangostar_list for object %}
-	</header>
-	<section>
-		{{ object.body }}
-	</section>
+  <header>
+    <h2>{{ object.title }}</h2>
+    {% render_djangostar_list for object %}
+  </header>
+  <section>
+    {{ object.body }}
+  </section>
 </article>
 {% endblock %}
