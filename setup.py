@@ -22,7 +22,6 @@ setup(  name          = 'django-star',
         package_data  = {'star' : ['templates/star/*.html']},
         packages      = ('star', 'star.api', 'star.templatetags',),
         include_package_data = True,
-        requires      = ('pyyaml', ),
         dependency_links = (
             r"https://bitbucket.org/lambdalisue/django-piston/get/a40885f1da15.tar.gz#egg=django-piston",
         ),
