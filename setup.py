@@ -4,7 +4,7 @@
 # created by giginet on 2011/10/07
 #
 from setuptools import setup
-setup(name          = 'django-star',
+setup(  name          = 'django-star',
         description   = 'Django plugin for adding a star to Django model object universally.',
         version       = '0.999',
         keywords      = "django hatena star",
@@ -19,10 +19,12 @@ setup(name          = 'django-star',
         url           = r'https://github.com/giginet/django-star',
         download_url  = r'https://github.com/giginet/django-star/tarball/master',
         license       = 'BSD',
-        packages      = ('star','star.api',),
+        package_data  = {'star' : ['templates/star/*.html']},
+        packages      = ('star', 'star.api', 'star.templatetags',),
         include_package_data = True,
+        requires      = ('pyyaml', ),
         dependency_links = (
             r"https://bitbucket.org/lambdalisue/django-piston/get/a40885f1da15.tar.gz#egg=django-piston",
-            ),
-        )
+        ),
+)
 
